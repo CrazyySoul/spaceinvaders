@@ -22,19 +22,19 @@ public abstract class Sprite {
 	}
 
 	private boolean estOrdonneeCouverte(int y) {
-		return (ordonneeLaPlusHaute() <= y) && (y <= ordonneeLaPlusBasse());
+		return (ordonneeLaPlusBasse() <= y) && (y <= ordonneeLaPlusHaute());
 	}
 
 	private boolean estAbscisseCouverte(int x) {
 		return (abscisseLaPlusAGauche() <= x) && (x <= abscisseLaPlusADroite());
 	}
 
-	public int ordonneeLaPlusBasse() {
+	public int ordonneeLaPlusHaute() {
 		return this.origine.ordonnee();
 	}
 
-	public int ordonneeLaPlusHaute() {
-		return ordonneeLaPlusBasse() - this.dimension.hauteur() + 1;
+	public int ordonneeLaPlusBasse() {
+		return ordonneeLaPlusHaute() - this.dimension.hauteur() + 1;
 	}
 
 	public int abscisseLaPlusADroite() {

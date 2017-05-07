@@ -20,25 +20,33 @@ public class DessinSpaceInvaders implements DessinJeu{
 	 * dessiner un objet consiste a dessiner sur l'image suivante methode
 	 * redefinie de Afficheur
 	 */
-	private void dessinerObjet(String s, BufferedImage im) {
+	private void dessinerUnVaisseau(Vaisseau v, BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		switch (s) {
-		case "vaisseau":
 			crayon.setColor(Color.gray);
-			crayon.fillRect(jeu.getVaisseau().abscisseLaPlusAGauche(), jeu.getVaisseau().ordonneeLaPlusHaute(), jeu.getVaisseau().dimension.longueur, jeu.getVaisseau().dimension.hauteur);
-			break;
-		default:
-			throw new AssertionError("objet inexistant");
+			crayon.fillRect(v.abscisseLaPlusAGauche(), v.ordonneeLaPlusBasse(), v.longueur(), v.hauteur());
+
 		}
-	}
 
 	/**
 	 * methode dessiner redefinie de Afficheur retourne une image du jeu
 	 */
 	public void dessiner(BufferedImage im) {
-		// no sait que c'est un jeuTest
-		SpaceInvaders j = (SpaceInvaders) jeu;
-		Vaisseau pj = j.getVaisseau();
-		this.dessinerObjet("vaisseau", im);
+		if(this.jeu.aUnVaisseau()){
+			Vaisseau v = this.jeu.recupererUnVaisseau();
+			this.dessinerUnVaisseau(v, im);
+		}
+		
+		if(this.jeu.aUnMissile()){
+			Missile m = this.jeu.recupererUnMissile();
+			this.dessinerUnMissile(m, im);
+		}
+		
+	}
+
+	private void dessinerUnMissile(Missile m, BufferedImage im) {
+		Graphics2D crayon = (Graphics2D) im.getGraphics();
+		crayon.setColor(Color.blue);
+		crayon.fillRect(m.abscisseLaPlusAGauche(), m.ordonneeLaPlusBasse(), m.longueur(), m.hauteur());
+		
 	}
 }

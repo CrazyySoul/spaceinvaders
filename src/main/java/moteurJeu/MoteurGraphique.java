@@ -14,15 +14,29 @@ public class MoteurGraphique {
 	 */
 	private InterfaceGraphique gui;
 
+	/**
+	 * l'afficheur a utiliser pour le rendu
+	 */
 	private DessinSpaceInvaders dessin;
 
 
+	/**
+	 * construit un moteur
+	 * 
+	 * @param pJeu
+	 *            jeu a lancer
+	 * @param pAffiche
+	 *            afficheur a utiliser
+	 */
 	public MoteurGraphique(SpaceInvaders pJeu, DessinSpaceInvaders pAffiche) {
 		// creation du jeu
 		this.jeu = pJeu;
 		this.dessin = pAffiche;
 	}
 
+	/**
+	 * permet de lancer le jeu
+	 */
 	public void lancerJeu(int width, int height) throws InterruptedException {
 
 		// creation de l'interface graphique
