@@ -5,18 +5,18 @@ import moteurJeu.Commande;
 import moteurJeu.Constante;
 import moteurJeu.Jeu;
 
-public class SpaceInvaders implements Jeu{
+public class SpaceInvaders implements Jeu {
 
 	int longueur;
 	int hauteur;
 	Vaisseau vaisseau;
 
-	
 	public void initialiserJeu() {
-		positionnerUnNouveauVaisseau(new Dimension(Constante.VAISSEAU_LONGUEUR, Constante.VAISSEAU_HAUTEUR), new Position(70, 90));
-		
+		Position positionVaisseau = new Position(this.longueur / 2, this.hauteur - 1);
+		Dimension dimensionVaisseau = new Dimension(Constante.VAISSEAU_LONGUEUR, Constante.VAISSEAU_HAUTEUR);
+		positionnerUnNouveauVaisseau(dimensionVaisseau, positionVaisseau, Constante.VAISSEAU_VITESSE);
 	}
-	
+
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
 		this.hauteur = hauteur;
@@ -57,55 +57,60 @@ public class SpaceInvaders implements Jeu{
 	public void deplacerVaisseauVersLaDroite() {
 		if (vaisseau.abscisseLaPlusADroite() < (longueur - 1))
 			vaisseau.seDeplacerVersLaDroite();
+		if (!estDansEspaceJeu(vaisseau.abscisseLaPlusADroite(), vaisseau.ordonneeLaPlusHaute())) {
+			vaisseau.positionner(longueur - vaisseau.dimension.longueur(), vaisseau.ordonneeLaPlusBasse());
+		}
 	}
 
 	public void deplacerVaisseauVersLaGauche() {
-		if (vaisseau.abscisseLaPlusAGauche() - 1 > 0)
+		if (vaisseau.abscisseLaPlusAGauche() > 0)
 			vaisseau.seDeplacerVersLaGauche();
+		if (!estDansEspaceJeu(vaisseau.abscisseLaPlusAGauche(), vaisseau.ordonneeLaPlusHaute())) {
+			vaisseau.positionner(0, vaisseau.ordonneeLaPlusBasse());
+		}
 
 	}
 
-	 public void positionnerUnNouveauVaisseau(Dimension dimension, Position position) {
-			
-			int x = position.abscisse();
-			int y = position.ordonnee();
-			
-			if (!estDansEspaceJeu(x, y))
-				throw new HorsEspaceJeuException("La position du vaisseau est en dehors de l'espace jeu");
+	public void positionnerUnNouveauVaisseau(Dimension dimension, Position position, int vitesse) {
 
-			int longueurVaisseau = dimension.longueur();
-			int hauteurVaisseau = dimension.hauteur();
-			
-			if (!estDansEspaceJeu(x + longueurVaisseau - 1, y))
-				throw new DebordementEspaceJeuException("Le vaisseau déborde de l'espace jeu vers la droite à cause de sa longueur");
-			if (!estDansEspaceJeu(x, y - hauteurVaisseau + 1))
-				throw new DebordementEspaceJeuException("Le vaisseau déborde de l'espace jeu vers le bas à cause de sa hauteur");
+		int x = position.abscisse();
+		int y = position.ordonnee();
 
-			vaisseau = new Vaisseau(longueurVaisseau, hauteurVaisseau);
-			vaisseau.positionner(x, y);
-		}
-	 
-	 public Vaisseau getVaisseau(){
-		 return this.vaisseau;
-	 }
+		if (!estDansEspaceJeu(x, y))
+			throw new HorsEspaceJeuException("La position du vaisseau est en dehors de l'espace jeu");
+
+		int longueurVaisseau = dimension.longueur();
+		int hauteurVaisseau = dimension.hauteur();
+
+		if (!estDansEspaceJeu(x + longueurVaisseau - 1, y))
+			throw new DebordementEspaceJeuException(
+					"Le vaisseau déborde de l'espace jeu vers la droite à cause de sa longueur");
+		if (!estDansEspaceJeu(x, y - hauteurVaisseau + 1))
+			throw new DebordementEspaceJeuException(
+					"Le vaisseau déborde de l'espace jeu vers le bas à cause de sa hauteur");
+
+		vaisseau = new Vaisseau(dimension, position, vitesse);
+	}
+
+	public Vaisseau getVaisseau() {
+		return this.vaisseau;
+	}
 
 	@Override
 	public void evoluer(Commande c) {
-		if (c.gauche)
-		{
+		if (c.gauche) {
 			deplacerVaisseauVersLaGauche();
 		}
 
-		if (c.droite)
-		{
+		if (c.droite) {
 			deplacerVaisseauVersLaDroite();
 		}
-		
+
 	}
 
 	@Override
 	public boolean etreFini() {
-	//jeu infini
+		// jeu infini
 		return false;
 	}
 }
