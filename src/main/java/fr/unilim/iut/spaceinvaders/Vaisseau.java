@@ -1,5 +1,7 @@
 package fr.unilim.iut.spaceinvaders;
 
+import moteurJeu.Commande;
+
 public class Vaisseau {
 	Position origine;
 	Dimension dimension;
@@ -29,11 +31,11 @@ public class Vaisseau {
 		return (abscisseLaPlusAGauche() <= x) && (x <= abscisseLaPlusADroite());
 	}
 
-	private int ordonneeLaPlusBasse() {
+	public int ordonneeLaPlusBasse() {
 		return this.origine.ordonnee();
 	}
 
-	private int ordonneeLaPlusHaute() {
+	public int ordonneeLaPlusHaute() {
 		return ordonneeLaPlusBasse() - this.dimension.hauteur() + 1;
 	}
 
