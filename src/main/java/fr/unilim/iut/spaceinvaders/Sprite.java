@@ -5,6 +5,7 @@ public abstract class Sprite {
 	public Position origine;
 	public Dimension dimension;
 	protected int vitesse;
+	public Direction direction;
 
 	public Sprite(Dimension dimension, Position origine, int vitesse) {
 		super();
@@ -57,6 +58,14 @@ public abstract class Sprite {
 	
 	public void deplacerHorizontalementVers(Direction direction) {
 		this.origine.changerAbscisse(this.origine.abscisse() + direction.valeur()*vitesse);
+	}
+	
+	public Direction getDirection() {
+		return direction;
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
 
 }
