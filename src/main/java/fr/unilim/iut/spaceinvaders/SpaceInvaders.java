@@ -12,6 +12,7 @@ public class SpaceInvaders implements Jeu {
 	Vaisseau vaisseau;
 	Missile missile;
 	Envahisseur envahisseur;
+	boolean finPartie;
 
 	public void initialiserJeu() {
 		Position positionVaisseau = new Position(this.longueur / 2, this.hauteur - 1);
@@ -149,12 +150,18 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerMissile() {
 		int x = this.missile.abscisseLaPlusAGauche();
 		int y = this.missile.ordonneeLaPlusHaute();
+		Collision collision = new Collision();
 
 		if (!estDansEspaceJeu(x, y)) {
 			this.missile = null;
 		}
 		if (this.aUnMissile()) {
 			this.missile.deplacerVerticalementVers(Direction.HAUT_ECRAN);
+			
+			if(this.aUnEnvahisseur() && collision.detecterCollision(this.envahisseur, this.missile)){
+				this.envahisseur = null;
+			}
+				
 		}
 	}
 

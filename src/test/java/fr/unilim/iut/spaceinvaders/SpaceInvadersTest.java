@@ -522,4 +522,27 @@ public class SpaceInvadersTest {
        "...............\n" + 
        "...............\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
    }
+
+	@Test
+	public void test_PartieTermine(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(0, 1), 2);
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 3);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.deplacerMissile();
+		assertEquals("" + 
+			       "..MMM..........\n" + 
+			       "..MMM..........\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "VVVVVVV........\n" + 
+			       "VVVVVVV........\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
 }
