@@ -150,19 +150,21 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerMissile() {
 		int x = this.missile.abscisseLaPlusAGauche();
 		int y = this.missile.ordonneeLaPlusHaute();
-		Collision collision = new Collision();
 
 		if (!estDansEspaceJeu(x, y)) {
 			this.missile = null;
 		}
 		if (this.aUnMissile()) {
-			this.missile.deplacerVerticalementVers(Direction.HAUT_ECRAN);
-			
-			if(this.aUnEnvahisseur() && collision.detecterCollision(this.envahisseur, this.missile)){
-				this.envahisseur = null;
+			for(int i=0;i<this.missile.vitesse;i++){
+				this.missile.deplacerVerticalementVers(Direction.HAUT_ECRAN);
+				if (this.aUnEnvahisseur() && this.missile.detecterCollision(this.envahisseur)) {
+					this.envahisseur = null;
+				}
 			}
-				
+							
 		}
+		
+			
 	}
 
 	public void deplacerEnvahisseur() {
@@ -171,7 +173,8 @@ public class SpaceInvaders implements Jeu {
 		if (envahisseur.abscisseLaPlusADroite() >= longueur)
 			envahisseur.setDirection(Direction.GAUCHE);
 
-		this.envahisseur.deplacerHorizontalementVers(envahisseur.getDirection());
+		deplaceUnSpriteDeSaVitessePixelParPixel(this.envahisseur, this.envahisseur.getDirection());
+		
 	}
 
 	public void positionnerUnNouveauEnvahisseur(Dimension dimension, Position position, int vitesse) {
@@ -203,9 +206,15 @@ public class SpaceInvaders implements Jeu {
 		if (aDeplacer == null)
 			throw new SpriteInexistantException("Le Sprite n'existe pas");
 		if (aDeplacer.abscisseLaPlusADroite() < (longueur - 1))
-			aDeplacer.deplacerHorizontalementVers(Direction.DROITE);
+			deplaceUnSpriteDeSaVitessePixelParPixel(aDeplacer, Direction.DROITE);
 		if (!estDansEspaceJeu(aDeplacer.abscisseLaPlusADroite(), aDeplacer.ordonneeLaPlusBasse())) {
 			aDeplacer.positionner(longueur - aDeplacer.dimension.longueur(), aDeplacer.ordonneeLaPlusHaute());
+		}
+	}
+
+	private void deplaceUnSpriteDeSaVitessePixelParPixel(Sprite aDeplacer, Direction direction) {
+		for(int compteurDeVitesse = 0;compteurDeVitesse<aDeplacer.vitesse;compteurDeVitesse++){
+			aDeplacer.deplacerHorizontalementVers(direction);
 		}
 	}
 
@@ -213,7 +222,7 @@ public class SpaceInvaders implements Jeu {
 		if (aDeplacer == null)
 			throw new SpriteInexistantException("Le Sprite n'existe pas");
 		if (0 < aDeplacer.abscisseLaPlusAGauche())
-			aDeplacer.deplacerHorizontalementVers(Direction.GAUCHE);
+			deplaceUnSpriteDeSaVitessePixelParPixel(aDeplacer, Direction.GAUCHE);
 		if (!estDansEspaceJeu(aDeplacer.abscisseLaPlusAGauche(), aDeplacer.ordonneeLaPlusHaute())) {
 			aDeplacer.positionner(0, aDeplacer.ordonneeLaPlusHaute());
 		}

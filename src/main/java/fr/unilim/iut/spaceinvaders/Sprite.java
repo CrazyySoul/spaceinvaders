@@ -53,11 +53,12 @@ public abstract class Sprite {
 	}
 
 	public void deplacerVerticalementVers(Direction direction) {
-		this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur()*vitesse);
+			this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur());
+			
 	}
 	
 	public void deplacerHorizontalementVers(Direction direction) {
-		this.origine.changerAbscisse(this.origine.abscisse() + direction.valeur()*vitesse);
+		this.origine.changerAbscisse(this.origine.abscisse() + direction.valeur());
 	}
 	
 	public Direction getDirection() {
@@ -66,6 +67,32 @@ public abstract class Sprite {
 
 	public void setDirection(Direction direction) {
 		this.direction = direction;
+	}
+	
+	public boolean detecterCollision(Sprite sprite2) {
+		if (verifierCollision(this, sprite2)) {
+			return true;
+		}
+		return false;
+
+	}
+
+	private boolean verifierCollision(Sprite sprite1, Sprite sprite2) {
+		return verifierCollisionAbscisse(sprite1, sprite2) && verifierCollisionOrdonne(sprite1, sprite2);
+	}
+
+	private boolean verifierCollisionOrdonne(Sprite sprite2, Sprite sprite1) {
+		return (sprite2.ordonneeLaPlusHaute() >= sprite1.ordonneeLaPlusBasse()
+				&& sprite2.ordonneeLaPlusHaute() <= sprite1.ordonneeLaPlusHaute())
+				|| (sprite2.ordonneeLaPlusBasse() >= sprite1.ordonneeLaPlusBasse()
+						&& sprite2.ordonneeLaPlusBasse() <= sprite1.ordonneeLaPlusHaute());
+	}
+
+	private boolean verifierCollisionAbscisse(Sprite sprite2, Sprite sprite1) {
+		return (sprite2.abscisseLaPlusAGauche() >= sprite1.abscisseLaPlusAGauche()
+				&& sprite2.abscisseLaPlusAGauche() <= sprite1.abscisseLaPlusADroite())
+				|| (sprite2.abscisseLaPlusADroite() >= sprite1.abscisseLaPlusAGauche()
+						&& sprite2.abscisseLaPlusADroite() <= sprite1.abscisseLaPlusADroite());
 	}
 
 }

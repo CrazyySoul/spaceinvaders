@@ -415,6 +415,7 @@ public class SpaceInvadersTest {
 	public void test_EnvahisseurAvance_DeplacerEnvahisseurVersLaGauche_AvecVitesse() {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(7, 1), 3);
+		
 		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur());
 		assertEquals("" + "....EEE........\n" 
 						+ "....EEE........\n"
@@ -536,6 +537,29 @@ public class SpaceInvadersTest {
 		assertEquals("" + 
 			       "..MMM..........\n" + 
 			       "..MMM..........\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "VVVVVVV........\n" + 
+			       "VVVVVVV........\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_EnvahisseurDetruit(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(0, 1), 2);
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 40);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.deplacerMissile();
+		assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
 			       "...............\n" + 
 			       "...............\n" + 
 			       "...............\n" + 
