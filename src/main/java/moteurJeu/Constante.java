@@ -20,6 +20,8 @@ public class Constante {
 
 	public static final int MISSILE_LONGUEUR = 5;
 	public static final int MISSILE_HAUTEUR = 30;
-	public static final int MISSILE_VITESSE =20;
+	public static final int MISSILE_VITESSE =10;
+	
+	public static final int CADENCE_TIR = 1000;
 
 }

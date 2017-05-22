@@ -556,7 +556,6 @@ public class SpaceInvadersTest {
 		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
 		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 40);
 		spaceinvaders.deplacerMissile();
-		spaceinvaders.deplacerMissile();
 		assertEquals("" + 
 			       "...............\n" + 
 			       "...............\n" +
@@ -568,5 +567,101 @@ public class SpaceInvadersTest {
 			       "...............\n" + 
 			       "VVVVVVV........\n" + 
 			       "VVVVVVV........\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_VaisseauTirePlusieursMissile(){
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 5);
+		spaceinvaders.deplacerMissile();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 5);
+		assertEquals("" + 
+			       "...............\n" + 
+			       ".......MMM.....\n" +
+			       ".......MMM.....\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       ".......MMM.....\n" + 
+			       ".......MMM.....\n" + 
+			       ".....VVVVVVV...\n" + 
+			       ".....VVVVVVV...\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_VaisseauTirePlusieursMissileQuiNeSeChevauchePas(){
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 1);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 2);
+		assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       ".......MMM.....\n" + 
+			       ".......MMM.....\n" + 
+			       "...............\n" + 
+			       ".....VVVVVVV...\n" + 
+			       ".....VVVVVVV...\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_VaisseauTirePlusieursMissileQuiNeSeChevauchePasEtQuiSeDeplaceEnMemeTemps(){
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 1);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 2);
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.deplacerMissile();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 2);
+		spaceinvaders.deplacerMissile();
+		assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
+			       "...............\n" + 
+			       ".......MMM.....\n" + 
+			       "....MMMMMM.....\n" + 
+			       "....MMM........\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "..VVVVVVV......\n" + 
+			       "..VVVVVVV......\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_VaisseauTirePlusieursMissileAvecCadence(){
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 2);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 2);
+		assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       ".......MMM.....\n" + 
+			       ".......MMM.....\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       ".....VVVVVVV...\n" + 
+			       ".....VVVVVVV...\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
 	}
 }
