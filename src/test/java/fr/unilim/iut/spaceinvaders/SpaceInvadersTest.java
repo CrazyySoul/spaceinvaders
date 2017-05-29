@@ -349,7 +349,7 @@ public class SpaceInvadersTest {
 	public void test_EnvahisseurAvance_DeplacerEnvahisseurVersLaDroite_AvecVitesse() {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(7, 1), 3);
-		spaceinvaders.deplacerSpriteVersLaDroite(spaceinvaders.recupererEnvahisseur());
+		spaceinvaders.deplacerSpriteVersLaDroite(spaceinvaders.recupererEnvahisseur(0));
 		assertEquals("" + "..........EEE..\n" 
 						+ "..........EEE..\n"
 						+ "...............\n" 
@@ -381,7 +381,7 @@ public class SpaceInvadersTest {
 	public void test_EnvahisseurImmobile_DeplacerEnvahisseurVersLaDroite() {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(12, 1), 3);
-		spaceinvaders.deplacerSpriteVersLaDroite(spaceinvaders.recupererEnvahisseur());
+		spaceinvaders.deplacerSpriteVersLaDroite(spaceinvaders.recupererEnvahisseur(0));
 		assertEquals("" + "............EEE\n" 
 						+ "............EEE\n" 
 						+ "...............\n" 
@@ -398,7 +398,7 @@ public class SpaceInvadersTest {
 	public void test_EnvahisseurAvancePartiellement_DeplacerEnvahisseurVersLaDroite() {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(10, 1), 3);
-		spaceinvaders.deplacerSpriteVersLaDroite(spaceinvaders.recupererEnvahisseur());
+		spaceinvaders.deplacerSpriteVersLaDroite(spaceinvaders.recupererEnvahisseur(0));
 		assertEquals("" + "............EEE\n" 
 						+ "............EEE\n" 
 						+ "...............\n" 
@@ -416,7 +416,7 @@ public class SpaceInvadersTest {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(7, 1), 3);
 		
-		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur());
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur(0));
 		assertEquals("" + "....EEE........\n" 
 						+ "....EEE........\n"
 						+ "...............\n" 
@@ -433,7 +433,7 @@ public class SpaceInvadersTest {
 	public void test_EnvahisseurImmobile_DeplacerEnvahisseurVersLaGauche() {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(0, 1), 3);
-		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur());
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur(0));
 		assertEquals("" + "EEE............\n" 
 						+ "EEE............\n" 
 						+ "...............\n" 
@@ -450,7 +450,7 @@ public class SpaceInvadersTest {
 	public void test_EnvahisseurAvancePartiellement_DeplacerEnvahisseurVersLaGauche() {
 
 		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(2, 1), 3);
-		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur());
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererEnvahisseur(0));
 		assertEquals("" + "EEE............\n" 
 						+ "EEE............\n" 
 						+ "...............\n" 
@@ -578,7 +578,6 @@ public class SpaceInvadersTest {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 5);
@@ -627,7 +626,6 @@ public class SpaceInvadersTest {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		spaceinvaders.tirerUnMissile(new Dimension(3, 2), 2);
@@ -663,5 +661,83 @@ public class SpaceInvadersTest {
 			       "...............\n" + 
 			       ".....VVVVVVV...\n" + 
 			       ".....VVVVVVV...\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_PlusieursEnvahisseurBienPlace(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(0, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(4, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(8, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(12, 1), 2);
+		
+		assertEquals("" + 
+			       "EE..EE..EE..EE.\n" + 
+			       "EE..EE..EE..EE.\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_PlusieursEnvahisseurBienPlaceSeDeplaceBien(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(0, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(4, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(8, 1), 2);
+
+		spaceinvaders.deplacerEnvahisseur();
+		
+		assertEquals("" + 
+			       "..EE..EE..EE...\n" + 
+			       "..EE..EE..EE...\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_PlusieursEnvahisseurBienPlaceSeDeplaceBienEtChangeDeDirection(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(0, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(4, 1), 2);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(8, 1), 2);
+
+		spaceinvaders.deplacerEnvahisseur();
+		spaceinvaders.deplacerEnvahisseur();
+		spaceinvaders.deplacerEnvahisseur();
+		spaceinvaders.deplacerEnvahisseur();
+		
+		assertEquals("" + 
+			       "....EE..EE..EE.\n" + 
+			       "....EE..EE..EE.\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_LeveUneExceptionQuandTropDEnvahisseur(){
+		try {
+			spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(0, 1), 2);
+			spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(4, 1), 2);
+			spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(8, 1), 2);
+			spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(12, 1), 2);
+			spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2, 2), new Position(16, 1), 2);
+			fail("Devrait déclencher une exception HorsEspaceJeuException");
+		} catch (final HorsEspaceJeuException e) {
+		}
 	}
 }

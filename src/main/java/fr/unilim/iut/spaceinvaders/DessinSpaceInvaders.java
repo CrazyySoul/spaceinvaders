@@ -42,11 +42,13 @@ public class DessinSpaceInvaders implements DessinJeu {
 
 			}
 		}
-
-		if (this.jeu.aUnEnvahisseur()) {
-			Envahisseur e = this.jeu.recupererEnvahisseur();
-			this.dessinerUnEnvahisseur(e, im);
+		for(int i =0;i<jeu.envahisseur.size();i++){
+			if (this.jeu.aUnEnvahisseur(i)) {
+				Envahisseur e = this.jeu.recupererEnvahisseur(i);
+				this.dessinerUnEnvahisseur(e, im);
+			}
 		}
+		
 
 	}
 
