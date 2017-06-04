@@ -24,12 +24,4 @@ public class Vaisseau extends Sprite {
 		Position positionOrigineMissile = new Position(abscisseOrigineMissile, ordonneeeOrigineMissile);
 		return positionOrigineMissile;
 	}
-	
-	public int hauteur(){
-		return this.dimension.hauteur();
-	}
-	
-	public int longueur(){
-		return this.dimension.longueur();
-	}
 }

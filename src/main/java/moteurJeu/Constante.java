@@ -15,7 +15,8 @@ public class Constante {
 	public static final char MARQUE_FIN_LIGNE = '\n';
 	public static final char MARQUE_VIDE = '.';
 	public static final char MARQUE_VAISSEAU = 'V';
-	public static final char MARQUE_MISSILE = 'M';
+	public static final char MARQUE_MISSILE_VAISSEAU = 'M';
+	public static final char MARQUE_MISSILE_ENVAHISSEUR = 'N';
 	public static final char MARQUE_ENVAHISSEUR = 'E';
 
 	public static final int MISSILE_LONGUEUR = 5;

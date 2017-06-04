@@ -38,10 +38,10 @@ public class DessinSpaceInvaders implements DessinJeu {
 			Vaisseau v = this.jeu.recupererUnVaisseau();
 			this.dessinerUnVaisseau(v, im);
 		}
-		for (int i = 0; i < jeu.missile.size(); i++) {
-			if (this.jeu.aUnMissile(i)) {
-				Missile m = this.jeu.recupererUnMissile(i);
-				this.dessinerUnMissile(m, im);
+		for (int i = 0; i < jeu.missileVaisseau.size(); i++) {
+			if (this.jeu.aUnMissileVaisseau(i)) {
+				Missile m = this.jeu.recupererUnMissileVaisseau(i);
+				this.dessinerUnMissileVaisseau(m, im);
 
 			}
 		}
@@ -49,6 +49,12 @@ public class DessinSpaceInvaders implements DessinJeu {
 			if (this.jeu.aUnEnvahisseur(i)) {
 				Envahisseur e = this.jeu.recupererEnvahisseur(i);
 				this.dessinerUnEnvahisseur(e, im);
+			}
+		}
+		for(int i =0;i<jeu.missileEnvahisseur.size();i++){
+			if (this.jeu.aUnMissileEnvahisseur(i)) {
+				Missile n = this.jeu.recupererUnMissileEnvahisseur(i);
+				this.dessinerUnMissileEnvahisseur(n, im);
 			}
 		}
 		
@@ -64,9 +70,16 @@ public class DessinSpaceInvaders implements DessinJeu {
 		
 	}
 
-	private void dessinerUnMissile(Missile m, BufferedImage im) {
+	private void dessinerUnMissileVaisseau(Missile m, BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		crayon.setColor(Color.green);
+		crayon.fillRect(m.abscisseLaPlusAGauche(), m.ordonneeLaPlusBasse(), m.longueur(), m.hauteur());
+
+	}
+	
+	private void dessinerUnMissileEnvahisseur(Missile m, BufferedImage im) {
+		Graphics2D crayon = (Graphics2D) im.getGraphics();
+		crayon.setColor(Color.white);
 		crayon.fillRect(m.abscisseLaPlusAGauche(), m.ordonneeLaPlusBasse(), m.longueur(), m.hauteur());
 
 	}
