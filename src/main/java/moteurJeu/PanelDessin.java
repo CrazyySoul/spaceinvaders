@@ -1,7 +1,9 @@
 package moteurJeu;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -59,14 +61,15 @@ public class PanelDessin extends JPanel {
 	public void dessinerJeu() {
 		// generer la nouvelle image
 		this.dessin.dessiner(this.imageSuivante);
-
 		// inverses les images doublebuffereing
 		BufferedImage temp = this.imageEnCours;
 		// l'image a dessiner est celle qu'on a construite
 		this.imageEnCours = this.imageSuivante;
 		// l'ancienne image est videe
 		this.imageSuivante = temp;
-		this.imageSuivante.getGraphics().fillRect(0, 0, this.width, this.height);
+		Graphics2D crayon = (Graphics2D) this.imageSuivante.getGraphics();
+		crayon.setColor(Color.black);
+		crayon.fillRect(0, 0, this.width, this.height);
 		// met a jour l'image a afficher sur le panel
 		this.repaint();
 	}

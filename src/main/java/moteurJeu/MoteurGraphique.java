@@ -54,6 +54,11 @@ public class MoteurGraphique {
 			// met en attente
 			Thread.sleep(100);
 		}
+		
+		if(this.jeu.etreFini()){
+			Thread.sleep(2000);
+			System.exit(1);
+		}
 	}
 
 }

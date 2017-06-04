@@ -94,5 +94,13 @@ public abstract class Sprite {
 				|| (sprite2.abscisseLaPlusADroite() >= sprite1.abscisseLaPlusAGauche()
 						&& sprite2.abscisseLaPlusADroite() <= sprite1.abscisseLaPlusADroite());
 	}
+	
+	public int hauteur(){
+		return this.dimension.hauteur();
+	}
+	
+	public int longueur(){
+		return this.dimension.longueur();
+	}
 
 }

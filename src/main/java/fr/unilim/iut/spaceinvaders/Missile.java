@@ -6,12 +6,4 @@ public class Missile extends Sprite {
 		super(dimensionMissile, positionOrigineMissile, vitesseMissile);
 	}
 
-	public int longueur() {
-		return this.dimension.longueur();
-	}
-	
-	public int hauteur() {
-		return this.dimension.hauteur();
-	}
-
 }

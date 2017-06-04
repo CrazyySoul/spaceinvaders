@@ -740,4 +740,30 @@ public class SpaceInvadersTest {
 		} catch (final HorsEspaceJeuException e) {
 		}
 	}
+	
+	@Test
+	public void test_AuDebut_ScoreEgalAZero() {
+		assertEquals(0, spaceinvaders.getScore());
+	}
+	
+	@Test
+	public void test_ScoreAugmenteDeDixApresCollision() {
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2),new Position(0, 1),0);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2),new Position(12, 1),0);
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(0, 9), 0);
+		spaceinvaders.tirerUnMissile(new Dimension(1, 1), 5);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.deplacerMissile();
+		assertEquals(10, spaceinvaders.getScore());
+	}
+	
+	@Test
+	public void test_ScoreAugmenteDeCinquanteApresDestructionLigneEnvahisseur() {
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2),new Position(0, 1),0);
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(3, 2), new Position(0, 9), 5);
+		spaceinvaders.tirerUnMissile(new Dimension(1, 1), 5);
+		spaceinvaders.deplacerMissile();
+		spaceinvaders.deplacerMissile();
+		assertEquals(60, spaceinvaders.getScore());
+	}
 }
