@@ -3,8 +3,6 @@ package fr.unilim.iut.spaceinvaders;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.midi.MidiSystem;
-
 import fr.unilim.iut.spaceinvaders.utils.*;
 import moteurJeu.Commande;
 import moteurJeu.Constante;
@@ -13,7 +11,7 @@ import moteurJeu.Jeu;
 public class SpaceInvaders implements Jeu {
 
 	int longueur;
-	int hauteur;
+	int hauteur; 
 	Vaisseau vaisseau;
 	List<Missile> missileVaisseau = new ArrayList<Missile>();
 	List<Missile> missileEnvahisseur = new ArrayList<Missile>();
@@ -183,9 +181,10 @@ public class SpaceInvaders implements Jeu {
 			}
 		}
 
-		for (int numEnvahisseur = 0; numEnvahisseur < this.envahisseur.size(); numEnvahisseur++) {
+		for (int numEnvahisseur = 0; numEnvahisseur < getNombreEnvahisseur(); numEnvahisseur++) {
 			if (this.aUnEnvahisseur(numEnvahisseur)) {
-				deplacerEnvahisseur();
+					deplacerEnvahisseur();
+					tirAleatoirement(this.envahisseur.get(numEnvahisseur));
 			}
 		}
 		if (c.gauche) {
@@ -338,10 +337,8 @@ public class SpaceInvaders implements Jeu {
 		}
 
 		for (int numEnvahisseur = 0; numEnvahisseur < getNombreEnvahisseur(); numEnvahisseur++) {
-
 			deplaceUnSpriteDeSaVitessePixelParPixel(envahisseur.get(numEnvahisseur),
 					envahisseur.get(numEnvahisseur).getDirection());
-			tirAleatoirement(envahisseur.get(numEnvahisseur));
 		}
 
 	}

@@ -570,6 +570,49 @@ public class SpaceInvadersTest {
 	}
 	
 	@Test
+	public void test_EnvahisseurDetruitSurLeCoteDroit(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(2, 1), 2);
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.tirerUnMissileVaisseau(new Dimension(3, 2), 40);
+		spaceinvaders.deplacerMissileVaisseau();
+		assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "..VVVVVVV......\n" + 
+			       "..VVVVVVV......\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+
+	@Test
+	public void test_EnvahisseurDetruitSurLeCoteGauche(){
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(3, 2), new Position(6, 1), 2);
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
+		
+		spaceinvaders.deplacerSpriteVersLaGauche(spaceinvaders.recupererUnVaisseau());
+		spaceinvaders.tirerUnMissileVaisseau(new Dimension(3, 2), 40);
+		spaceinvaders.deplacerMissileVaisseau();
+		assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       "..VVVVVVV......\n" + 
+			       "..VVVVVVV......\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
 	public void test_VaisseauTirePlusieursMissile(){
 		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7, 2), new Position(5, 9), 3);
 		

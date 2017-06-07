@@ -57,8 +57,6 @@ public class DessinSpaceInvaders implements DessinJeu {
 				this.dessinerUnMissileEnvahisseur(n, im);
 			}
 		}
-		
-
 	}
 
 	private void dessinerUnScore(int s, BufferedImage im) {
